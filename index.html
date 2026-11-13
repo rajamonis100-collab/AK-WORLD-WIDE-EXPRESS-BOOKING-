@@ -447,14 +447,15 @@
                     <div class="header-service-badge outServiceHeader"></div>
                 </div>
 
-                <!-- Green Mark Area: Not to be attached text and date right under header -->
+                <!-- Upr wala ek hi box: Not to be attached + Usi ke niche DOCUMENT / NON-DOCUMENT -->
                 <div class="slip-row">
-                    <div class="slip-col" style="flex: 2; padding: 3px 6px;">
-                        <div class="terms-box-text" style="font-size: 8px; font-weight: bold;">
+                    <div class="slip-col" style="flex: 2; padding: 4px 6px;">
+                        <div class="terms-box-text" style="font-size: 8px; font-weight: bold; margin-bottom: 3px;">
                             Not to be attached to package. Handed to courier.
                         </div>
+                        <div class="bold-text outDocTypeLabel" style="font-size: 9.5px; text-transform: uppercase; font-weight: bold;"></div>
                     </div>
-                    <div class="slip-col" style="flex: 1; text-align: right; padding: 3px 6px;">
+                    <div class="slip-col" style="flex: 1; text-align: right; padding: 4px 6px;">
                         <span class="title-label" style="font-size: 8px;">Date</span>
                         <div class="bold-text outDate2" style="font-size: 10px;"></div>
                     </div>
@@ -529,7 +530,7 @@
                     </div>
                 </div>
 
-                <!-- Red Mark Area: Terms & Conditions below pieces/qty/weight box -->
+                <!-- Terms & Conditions below pieces/qty/weight box -->
                 <div class="slip-row">
                     <div class="slip-col" style="flex: 2; padding: 1px 3px;">
                         <span class="title-label" style="font-size: 7.5px; margin-bottom: 0;">Terms &amp; Conditions:</span>
@@ -567,14 +568,15 @@
                     <div class="header-service-badge outServiceHeader"></div>
                 </div>
 
-                <!-- Green Mark Area: Not to be attached text and date right under header -->
+                <!-- Upr wala ek hi box: Not to be attached + Usi ke niche DOCUMENT / NON-DOCUMENT -->
                 <div class="slip-row">
-                    <div class="slip-col" style="flex: 2; padding: 3px 6px;">
-                        <div class="terms-box-text" style="font-size: 8px; font-weight: bold;">
+                    <div class="slip-col" style="flex: 2; padding: 4px 6px;">
+                        <div class="terms-box-text" style="font-size: 8px; font-weight: bold; margin-bottom: 3px;">
                             Not to be attached to package. Handed to courier.
                         </div>
+                        <div class="bold-text outDocTypeLabel" style="font-size: 9.5px; text-transform: uppercase; font-weight: bold;"></div>
                     </div>
-                    <div class="slip-col" style="flex: 1; text-align: right; padding: 3px 6px;">
+                    <div class="slip-col" style="flex: 1; text-align: right; padding: 4px 6px;">
                         <span class="title-label" style="font-size: 8px;">Date</span>
                         <div class="bold-text outDate2" style="font-size: 10px;"></div>
                     </div>
@@ -650,7 +652,7 @@
                     </div>
                 </div>
 
-                <!-- Red Mark Area: Terms & Conditions below pieces/qty/weight box -->
+                <!-- Terms & Conditions below pieces/qty/weight box -->
                 <div class="slip-row">
                     <div class="slip-col" style="flex: 2; padding: 1px 3px;">
                         <span class="title-label" style="font-size: 7.5px; margin-bottom: 0;">Terms &amp; Conditions:</span>
@@ -1151,6 +1153,16 @@
         
         const waybillVal = document.getElementById('inWaybill').value;
 
+        // Dynamic Document Type Label mapping (Docs -> DOCUMENT, Non-Docs -> NON-DOCUMENT)
+        const docTypeVal = document.getElementById('inDocType').value;
+        let docTypeText = "";
+        if (docTypeVal === "Docs") {
+            docTypeText = "DOX";
+        } else if (docTypeVal === "Non-Docs") {
+            docTypeText = "NON-DOX";
+        }
+        updateText('outDocTypeLabel', docTypeText);
+
         const trackingVal = document.getElementById('inTracking').value.trim();
         const trackingRows = document.querySelectorAll('.tracking-row');
         trackingRows.forEach(row => {
@@ -1264,6 +1276,7 @@
             `Waybill: *${item.waybill}*\n` +
             `Branch: *${item.branch || 'LDA Ave 1'}*\n` +
             `Service: *${item.service}*\n` +
+            `Type: *${item.docType || '---'}*\n` +
             `Date: ${item.date}\n` +
             `Shipper: ${item.shipName || '---'} (${item.shipContact || '---'})\n` +
             `Receiver: ${item.recName} (${item.recCity || ''})\n` +
