@@ -104,7 +104,7 @@
         }
         .slip-row { display: flex; border-bottom: 1px solid #000; }
         .slip-row:last-child { border-bottom: none; }
-        .slip-col { padding: 5px 6px; border-right: 1px solid #000; }
+        .slip-col { padding: 3px 5px; border-right: 1px solid #000; }
         .slip-col:last-child { border-right: none; }
         
         .header-box { display: flex; align-items: center; justify-content: space-between; padding: 8px; border-bottom: 2px solid #000; }
@@ -113,17 +113,17 @@
         .header-service-badge { font-size: 16px; font-weight: 900; border: none; padding: 2px 8px; text-transform: uppercase; min-height: 25px; display: flex; align-items: center; justify-content: center; }
         .header-service-badge img { max-height: 25px; max-width: 110px; display: block; object-fit: contain; }
 
-        .title-label { font-weight: bold; text-transform: uppercase; font-size: 10px; display: block; margin-bottom: 2px; color: #222;}
+        .title-label { font-weight: bold; text-transform: uppercase; font-size: 10px; display: block; margin-bottom: 1px; color: #222;}
         .bold-text { font-weight: bold; font-size: 12px; }
         
         .terms-box-text {
-            font-size: 8.5px;
-            line-height: 1.25;
+            font-size: 8px;
+            line-height: 1.15;
             text-align: justify;
             color: #000;
         }
 
-        /* Watermark styling for price/market section */
+        /* Watermark styling for price/market section - shifted slightly right to center */
         .watermark-section {
             position: relative;
             background-color: #fff;
@@ -131,7 +131,7 @@
         .watermark-section::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0; left: 15%; width: 100%; height: 100%;
             background-image: url('discount.png');
             background-repeat: no-repeat;
             background-position: center;
@@ -430,15 +430,15 @@
                     <div class="header-text">
                         <h3>WORLD WIDE EXPRESS️®</h3>
                         <p class="outBranchAddr">LDA Ave 1 main raiwind road Lahore</p>
-                        <p class="outBranchEmail">rajarabnawaz100@gmail.com</p>
+                        <p class="outBranchEmail">rajarabnwaz100@gmail.com</p>
                         <p class="outBranchContact">03228073938 / 03101469911</p>
                     </div>
                     <div class="header-service-badge outServiceHeader"></div>
                 </div>
 
                 <div class="slip-row">
-                    <div class="slip-col" style="flex: 2;">
-                        <span class="title-label">Terms &amp; Conditions:</span>
+                    <div class="slip-col" style="flex: 2; padding: 2px 4px;">
+                        <span class="title-label" style="font-size: 8.5px; margin-bottom: 0;">Terms &amp; Conditions:</span>
                         <div class="terms-box-text">
                             Parcels are delivered as per the given schedule; no claims apply for delays due to accidents or flight cancellations. All shipments are sent at the customer’s own risk with no damage warranty. Loss claims are limited to $100 USD or invoice value, whichever is less. Due to low-freight rates, shippers must obtain their own insurance for valuable items. The shipper is solely responsible if the parcel contains dangerous goods, illegal items, explosives, firearms, hazardous materials, jewelry, passports, or drugs. For non-duty-paid or NON DDP services, all applicable customs duties and taxes will be charged to the receiver.
                         </div>
@@ -536,14 +536,14 @@
                     <div class="header-text">
                         <h3>WORLD WIDE EXPRESS️®</h3>
                         <p class="outBranchAddr">LDA Ave 1 main raiwind road Lahore</p>
-                        <p class="outBranchEmail">rajarabnawaz100@gmail.com</p>
+                        <p class="outBranchEmail">rajarabnwaz100@gmail.com</p>
                         <p class="outBranchContact">03228073938 / 03101469911</p>
                     </div>
                     <div class="header-service-badge outServiceHeader"></div>
                 </div>
                 <div class="slip-row">
-                    <div class="slip-col" style="flex: 2;">
-                        <span class="title-label">Terms &amp; Conditions:</span>
+                    <div class="slip-col" style="flex: 2; padding: 2px 4px;">
+                        <span class="title-label" style="font-size: 8.5px; margin-bottom: 0;">Terms &amp; Conditions:</span>
                         <div class="terms-box-text">
                             Parcels are delivered as per the given schedule; no claims apply for delays due to accidents or flight cancellations. All shipments are sent at the customer’s own risk with no damage warranty. Loss claims are limited to $100 USD or invoice value, whichever is less. Due to low-freight rates, shippers must obtain their own insurance for valuable items. The shipper is solely responsible if the parcel contains dangerous goods, illegal items, explosives, firearms, hazardous materials, jewelry, passports, or drugs. For non-duty-paid or NON DDP services, all applicable customs duties and taxes will be charged to the receiver.
                         </div>
@@ -1144,7 +1144,27 @@
         if (recCountry) {
             fullRecAddress += (fullRecAddress ? '\n' : '') + recCountry;
         }
-        updateText('outRecAddr', fullRecAddress);
+        
+        // Update receiver address and make country bold & uppercase
+        let recAddrElements = document.querySelectorAll('.outRecAddr');
+        recAddrElements.forEach(el => {
+            el.innerHTML = '';
+            let addrPart = recAddr + (cityPostalLine ? (recAddr ? '<br>' : '') + cityPostalLine : '');
+            if (addrPart) {
+                let div = document.createElement('div');
+                div.innerHTML = addrPart;
+                el.appendChild(div);
+            }
+            if (recCountry) {
+                let countryDiv = document.createElement('div');
+                countryDiv.style.fontWeight = 'bold';
+                countryDiv.style.fontSize = '12.5px';
+                countryDiv.style.textTransform = 'uppercase';
+                countryDiv.innerText = recCountry;
+                el.appendChild(countryDiv);
+            }
+        });
+
         updateText('outRecContact', document.getElementById('inRecContact').value);
         
         let prodVal = document.getElementById('inProdDetails').value;
@@ -1215,7 +1235,7 @@
             `Date: ${item.date}\n` +
             `Shipper: ${item.shipName || '---'} (${item.shipContact || '---'})\n` +
             `Receiver: ${item.recName} (${item.recCity || ''})\n` +
-            `Destination: ${item.recCountry ? item.recCountry.toUpperCase() : '---'}\n` +
+            `Destination: *${item.recCountry ? item.recCountry.toUpperCase() : '---'}*\n` +
             `Weight: ${item.wt || '---'} kg\n` +
             `Pieces: ${item.pieces || '---'}\n` +
             `Qty: ${item.qty || '1'}\n` +
@@ -1400,8 +1420,22 @@
         let fullRecAddr = item.recAddr || '';
         let cityPostal = [item.recCity, item.recPostal].filter(Boolean).join(' - ');
         if (cityPostal) fullRecAddr += (fullRecAddr ? '\n' : '') + cityPostal;
-        if (item.recCountry) fullRecAddr += (fullRecAddr ? '\n' : '') + item.recCountry.toUpperCase();
-        document.getElementById('invRecAddr').innerText = fullRecAddr;
+        
+        let invRecAddrEl = document.getElementById('invRecAddr');
+        invRecAddrEl.innerHTML = '';
+        if (fullRecAddr) {
+            let div = document.createElement('div');
+            div.innerText = fullRecAddr;
+            invRecAddrEl.appendChild(div);
+        }
+        if (item.recCountry) {
+            let countryDiv = document.createElement('div');
+            countryDiv.style.fontWeight = 'bold';
+            countryDiv.style.fontSize = '11px';
+            countryDiv.style.textTransform = 'uppercase';
+            countryDiv.innerText = item.recCountry.toUpperCase();
+            invRecAddrEl.appendChild(countryDiv);
+        }
         
         document.getElementById('invRecContact').innerText = item.recContact || '';
         document.getElementById('invDate').innerText = item.date || '';
