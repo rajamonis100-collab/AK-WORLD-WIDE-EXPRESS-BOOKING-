@@ -116,6 +116,35 @@
         .title-label { font-weight: bold; text-transform: uppercase; font-size: 10px; display: block; margin-bottom: 2px; color: #222;}
         .bold-text { font-weight: bold; font-size: 12px; }
         
+        .terms-box-text {
+            font-size: 8.5px;
+            line-height: 1.25;
+            text-align: justify;
+            color: #000;
+        }
+
+        /* Watermark styling for price/market section */
+        .watermark-section {
+            position: relative;
+            background-color: #fff;
+        }
+        .watermark-section::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('discount.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .watermark-section > div {
+            position: relative;
+            z-index: 2;
+        }
+
         .barcode-area { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px; }
         .barcode-area svg { max-width: 100%; height: 40px; }
 
@@ -129,14 +158,14 @@
             background: rgba(0,0,0,0.6);
             z-index: 99999;
             overflow-y: auto;
-            padding: 20px;
+            padding: 15px;
             box-sizing: border-box;
         }
         .invoice-box {
             background: #fff;
-            max-width: 700px;
+            max-width: 650px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
             border-radius: 6px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             color: #000;
@@ -147,7 +176,7 @@
             @page { size: A4 landscape; margin: 4mm; }
             body { background: white; margin: 0; padding: 0; }
             
-            .no-print-section, .btn-container, h2, .history-section, .btn-logout, #invoiceModal, #mainMenu { 
+            .no-print-section, .no-print-bar, .btn-container, h2, .history-section, .btn-logout, #invoiceModal, #mainMenu { 
                 display: none !important; 
             }
             .container { 
@@ -189,7 +218,7 @@
                 width: 3%;
             }
 
-            @page invoicePage { size: A4 portrait; margin: 10mm; }
+            @page invoicePage { size: A4 portrait; margin: 8mm; }
             body.invoice-print-mode {
                 page: invoicePage;
             }
@@ -213,8 +242,8 @@
                 border: 1px solid #000 !important;
                 width: 100% !important;
                 max-width: 100% !important;
-                margin: 0 !important;
-                padding: 5px !important;
+                margin: 0 auto !important;
+                padding: 10px !important;
             }
             body.invoice-print-mode .no-print-invoice { display: none !important; }
             body.invoice-print-mode .invoice-box input { border: none !important; background: transparent !important; outline: none !important; }
@@ -270,7 +299,7 @@
 <!-- MAIN BOOKING CONTENT SCREEN -->
 <div id="mainContent" style="display:none;">
 <div class="container">
-    <div style="overflow:hidden; margin-bottom:10px;">
+    <div class="no-print-bar" style="overflow:hidden; margin-bottom:10px;">
         <button class="btn-logout" onclick="logoutAdmin()">🚪 Logout</button>
         <button onclick="backToMenu()" style="float:left; background:#6c757d; color:white; border:none; padding:6px 12px; border-radius:4px; font-size:12px; cursor:pointer; font-weight:bold;">⬅️ Main Menu</button>
     </div>
@@ -327,7 +356,7 @@
             <div class="form-group col"><label>Postal Code</label><input type="text" id="inRecPostal"></div>
         </div>
 
-        <div class="form-group"><label>Country Name</label><input type="text" id="inRecCountry"></div>
+        <div class="form-group"><label>Country Name</label><input type="text" id="inRecCountry" style="text-transform: uppercase;"></div>
         <div class="form-group"><label>Receiver Contact</label><input type="text" id="inRecContact"></div>
 
         <hr>
@@ -409,10 +438,10 @@
 
                 <div class="slip-row">
                     <div class="slip-col" style="flex: 2;">
-                        <span class="title-label">Waybill</span>
-                        <div><span class="outWaybill" style="font-weight: normal; font-size: 14px;"></span></div>
-                        <div><span class="outDocType" style="font-weight: bold; text-transform: uppercase;">Non-Docs</span><br>Not to be attached to package</div>
-                        <div style="margin-top: 5px;" class="outDate1"></div>
+                        <span class="title-label">Terms &amp; Conditions:</span>
+                        <div class="terms-box-text">
+                            Parcels are delivered as per the given schedule; no claims apply for delays due to accidents or flight cancellations. All shipments are sent at the customer’s own risk with no damage warranty. Loss claims are limited to $100 USD or invoice value, whichever is less. Due to low-freight rates, shippers must obtain their own insurance for valuable items. The shipper is solely responsible if the parcel contains dangerous goods, illegal items, explosives, firearms, hazardous materials, jewelry, passports, or drugs. For non-duty-paid or NON DDP services, all applicable customs duties and taxes will be charged to the receiver.
+                        </div>
                     </div>                  
                 </div>
                 
@@ -462,24 +491,26 @@
                     </div>
                 </div>
 
-                <div class="slip-row">
-                    <div class="slip-col" style="flex: 2; padding: 0;">
-                        <div style="display: flex; border-bottom: 1px solid #000; padding: 4px; font-weight: bold; font-size: 10px;">
-                            <div style="flex: 1;">Pieces</div>
-                            <div style="flex: 1; border-left: 1px solid #000; padding-left: 4px;">Qty</div>
-                            <div style="flex: 1; border-left: 1px solid #000; padding-left: 4px;">Volume</div>
-                            <div style="flex: 1.5; border-left: 1px solid #000; padding-left: 4px;">Weight</div>
+                <div class="slip-row watermark-section">
+                    <div style="display: flex; width: 100%;">
+                        <div class="slip-col" style="flex: 2; padding: 0; border-right: 1px solid #000;">
+                            <div style="display: flex; border-bottom: 1px solid #000; padding: 4px; font-weight: bold; font-size: 10px;">
+                                <div style="flex: 1;">Pieces</div>
+                                <div style="flex: 1; border-left: 1px solid #000; padding-left: 4px;">Qty</div>
+                                <div style="flex: 1; border-left: 1px solid #000; padding-left: 4px;">Volume</div>
+                                <div style="flex: 1.5; border-left: 1px solid #000; padding-left: 4px;">Weight</div>
+                            </div>
+                            <div style="display: flex; padding: 4px; font-size: 12px;">
+                                <div style="flex: 1;" class="outPieces"></div>
+                                <div style="flex: 1;" class="outQty"></div>
+                                <div style="flex: 1;" class="outVol"></div>
+                                <div style="flex: 1.5;" class="outWt"></div>
+                            </div>
                         </div>
-                        <div style="display: flex; padding: 4px; font-size: 12px;">
-                            <div style="flex: 1;" class="outPieces"></div>
-                            <div style="flex: 1;" class="outQty"></div>
-                            <div style="flex: 1;" class="outVol"></div>
-                            <div style="flex: 1.5;" class="outWt"></div>
+                        <div class="slip-col" style="flex: 1.2; border-left: none;">
+                            <span class="title-label">Price</span>
+                            <div class="outPrice" style="font-weight: normal; font-size: 13px; white-space: nowrap;"></div>
                         </div>
-                    </div>
-                    <div class="slip-col" style="flex: 1.2; border-left: 1px solid #000;">
-                        <span class="title-label">Price</span>
-                        <div class="outPrice" style="font-weight: normal; font-size: 13px; white-space: nowrap;"></div>
                     </div>
                 </div>
 
@@ -498,7 +529,8 @@
 
             <!-- Central Split Line -->
             <div class="scissor-line-vertical">✂</div>
-              <!-- ================= SLIP 2 ================= -->
+
+            <!-- ================= SLIP 2 ================= -->
             <div class="slip-preview">
                 <div class="header-box">
                     <div class="header-text">
@@ -511,10 +543,10 @@
                 </div>
                 <div class="slip-row">
                     <div class="slip-col" style="flex: 2;">
-                        <span class="title-label">Waybill</span>
-                        <div><span class="outWaybill" style="font-weight: normal; font-size: 14px;"></span></div>
-                        <div><span class="outDocType" style="font-weight: bold; text-transform: uppercase;">Non-Docs</span><br>Not to be attached to package</div>
-                        <div style="margin-top: 5px;" class="outDate1"></div>
+                        <span class="title-label">Terms &amp; Conditions:</span>
+                        <div class="terms-box-text">
+                            Parcels are delivered as per the given schedule; no claims apply for delays due to accidents or flight cancellations. All shipments are sent at the customer’s own risk with no damage warranty. Loss claims are limited to $100 USD or invoice value, whichever is less. Due to low-freight rates, shippers must obtain their own insurance for valuable items. The shipper is solely responsible if the parcel contains dangerous goods, illegal items, explosives, firearms, hazardous materials, jewelry, passports, or drugs. For non-duty-paid or NON DDP services, all applicable customs duties and taxes will be charged to the receiver.
+                        </div>
                     </div>                  
                 </div>
                 
@@ -565,24 +597,26 @@
                     </div>
                 </div>
 
-                <div class="slip-row">
-                    <div class="slip-col" style="flex: 2; padding: 0;">
-                        <div style="display: flex; border-bottom: 1px solid #000; padding: 4px; font-weight: bold; font-size: 10px;">
-                            <div style="flex: 1;">Pieces</div>
-                            <div style="flex: 1; border-left: 1px solid #000; padding-left: 4px;">Qty</div>
-                            <div style="flex: 1; border-left: 1px solid #000; padding-left: 4px;">Volume</div>
-                            <div style="flex: 1.5; border-left: 1px solid #000; padding-left: 4px;">Weight</div>
+                <div class="slip-row watermark-section">
+                    <div style="display: flex; width: 100%;">
+                        <div class="slip-col" style="flex: 2; padding: 0; border-right: 1px solid #000;">
+                            <div style="display: flex; border-bottom: 1px solid #000; padding: 4px; font-weight: bold; font-size: 10px;">
+                                <div style="flex: 1;">Pieces</div>
+                                <div style="flex: 1; border-left: 1px solid #000; padding-left: 4px;">Qty</div>
+                                <div style="flex: 1; border-left: 1px solid #000; padding-left: 4px;">Volume</div>
+                                <div style="flex: 1.5; border-left: 1px solid #000; padding-left: 4px;">Weight</div>
+                            </div>
+                            <div style="display: flex; padding: 4px; font-size: 12px;">
+                                <div style="flex: 1;" class="outPieces"></div>
+                                <div style="flex: 1;" class="outQty"></div>
+                                <div style="flex: 1;" class="outVol"></div>
+                                <div style="flex: 1.5;" class="outWt"></div>
+                            </div>
                         </div>
-                        <div style="display: flex; padding: 4px; font-size: 12px;">
-                            <div style="flex: 1;" class="outPieces"></div>
-                            <div style="flex: 1;" class="outQty"></div>
-                            <div style="flex: 1;" class="outVol"></div>
-                            <div style="flex: 1.5;" class="outWt"></div>
+                        <div class="slip-col" style="flex: 1.2; border-left: none;">
+                            <span class="title-label">Price</span>
+                            <div class="outPrice" style="font-weight: normal; font-size: 13px; white-space: nowrap;"></div>
                         </div>
-                    </div>
-                    <div class="slip-col" style="flex: 1.2; border-left: 1px solid #000;">
-                        <span class="title-label">Price</span>
-                        <div class="outPrice" style="font-weight: normal; font-size: 13px; white-space: nowrap;"></div>
                     </div>
                 </div>
 
@@ -667,7 +701,7 @@
                     <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;" id="invValueUnit"></td>
                     <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;" id="invSubtotal"></td>
                 </tr>
-                 <tr style="height: 15px;"><td style="border: 1px solid #000; text-align: center;">2</td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td></tr>
+                <tr style="height: 15px;"><td style="border: 1px solid #000; text-align: center;">2</td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td></tr>
                 <tr style="height: 15px;"><td style="border: 1px solid #000; text-align: center;">3</td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td></tr>
                 <tr style="height: 15px;"><td style="border: 1px solid #000; text-align: center;">4</td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td></tr>
                 <tr style="height: 15px;"><td style="border: 1px solid #000; text-align: center;">5</td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td><td style="border: 1px solid #000;"></td></tr>
@@ -978,6 +1012,7 @@
         area.focus();
         updateSlip();
     }
+
     function setAutomaticDate() {
         const today = new Date();
         const dd = String(today.getDate()).padStart(2, '0');
@@ -1075,7 +1110,6 @@
         });
         
         const waybillVal = document.getElementById('inWaybill').value;
-        updateText('outWaybill', waybillVal);
 
         const trackingVal = document.getElementById('inTracking').value.trim();
         const trackingRows = document.querySelectorAll('.tracking-row');
@@ -1088,7 +1122,6 @@
         });
         updateText('outTracking', trackingVal);
 
-        updateText('outDate1', document.getElementById('inDate').value);
         updateText('outDate2', document.getElementById('inDate').value); 
         
         updateText('outShipName', document.getElementById('inShipName').value);
@@ -1101,7 +1134,7 @@
         const recAddr = document.getElementById('inRecAddr').value.trim();
         const recCity = document.getElementById('inRecCity').value.trim();
         const recPostal = document.getElementById('inRecPostal').value.trim();
-        const recCountry = document.getElementById('inRecCountry').value.trim();
+        const recCountry = document.getElementById('inRecCountry').value.trim().toUpperCase();
         
         let fullRecAddress = recAddr;
         let cityPostalLine = [recCity, recPostal].filter(Boolean).join(' - ');
@@ -1114,7 +1147,6 @@
         updateText('outRecAddr', fullRecAddress);
         updateText('outRecContact', document.getElementById('inRecContact').value);
         
-        // Product Details for Slip: Multiple lines removed (converted to space)
         let prodVal = document.getElementById('inProdDetails').value;
         let slipProdVal = prodVal ? prodVal.replace(/[\r\n]+/g, ' ') : '';
         updateText('outProdDetails', slipProdVal);
@@ -1125,8 +1157,6 @@
         rawValue = rawValue.replace(/\$/g, ''); 
         if (rawValue !== "") { rawValue = '$' + rawValue; }
         updateText('outValue', rawValue);
-        
-        updateText('outDocType', document.getElementById('inDocType').value);
         
         updateText('outPieces', document.getElementById('inPieces').value);
         updateText('outQty', document.getElementById('inQty').value);
@@ -1185,7 +1215,7 @@
             `Date: ${item.date}\n` +
             `Shipper: ${item.shipName || '---'} (${item.shipContact || '---'})\n` +
             `Receiver: ${item.recName} (${item.recCity || ''})\n` +
-            `Destination: ${item.recCountry || '---'}\n` +
+            `Destination: ${item.recCountry ? item.recCountry.toUpperCase() : '---'}\n` +
             `Weight: ${item.wt || '---'} kg\n` +
             `Pieces: ${item.pieces || '---'}\n` +
             `Qty: ${item.qty || '1'}\n` +
@@ -1280,7 +1310,7 @@
             recAddr: document.getElementById('inRecAddr').value,
             recCity: document.getElementById('inRecCity').value,
             recPostal: document.getElementById('inRecPostal').value,
-            recCountry: document.getElementById('inRecCountry').value,
+            recCountry: document.getElementById('inRecCountry').value.trim().toUpperCase(),
             recContact: document.getElementById('inRecContact').value,
             prodDetails: document.getElementById('inProdDetails').value,
             value: document.getElementById('inValue').value,
@@ -1370,7 +1400,7 @@
         let fullRecAddr = item.recAddr || '';
         let cityPostal = [item.recCity, item.recPostal].filter(Boolean).join(' - ');
         if (cityPostal) fullRecAddr += (fullRecAddr ? '\n' : '') + cityPostal;
-        if (item.recCountry) fullRecAddr += (fullRecAddr ? '\n' : '') + item.recCountry;
+        if (item.recCountry) fullRecAddr += (fullRecAddr ? '\n' : '') + item.recCountry.toUpperCase();
         document.getElementById('invRecAddr').innerText = fullRecAddr;
         
         document.getElementById('invRecContact').innerText = item.recContact || '';
@@ -1382,7 +1412,6 @@
         document.getElementById('invPieces').innerText = item.pieces || '';
         document.getElementById('invWt').innerText = (item.wt ? item.wt + ' kg' : '');
         
-        // Product Details for Invoice Form retains full multiple lines
         document.getElementById('invProdDetails').innerText = item.prodDetails || '';
         document.getElementById('invPiecesQty').innerText = item.qty || item.pieces || '1';
         
@@ -1427,7 +1456,7 @@
         document.getElementById('inRecAddr').value = item.recAddr || '';
         document.getElementById('inRecCity').value = item.recCity || '';
         document.getElementById('inRecPostal').value = item.recPostal || '';
-        document.getElementById('inRecCountry').value = item.recCountry || '';
+        document.getElementById('inRecCountry').value = (item.recCountry || '').toUpperCase();
         document.getElementById('inRecContact').value = item.recContact;
         document.getElementById('inProdDetails').value = item.prodDetails;
         document.getElementById('inValue').value = item.value;
