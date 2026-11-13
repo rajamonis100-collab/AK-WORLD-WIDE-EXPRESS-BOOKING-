@@ -17,6 +17,8 @@
             margin: 10px;
             background-color: #f0f2f5;
             color: #333;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
         .container {
             max-width: 100%;
@@ -126,22 +128,26 @@
             overflow: hidden;
         }
 
-        /* Watermark styling for price/market section - shifted slightly right to center */
+        /* Watermark styling for price/market section with forced print color support */
         .watermark-section {
             position: relative;
-            background-color: #fff;
+            background-color: #fff !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
         }
         .watermark-section::before {
             content: "";
             position: absolute;
-            top: 0; left: 15%; width: 100%; height: 100%;
+            top: 0; left: 20%; width: 70%; height: 100%;
             background-image: url('discount.png');
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
-            opacity: 0.15;
+            opacity: 0.22;
             pointer-events: none;
             z-index: 1;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
         }
         .watermark-section > div {
             position: relative;
@@ -177,7 +183,7 @@
         /* PRINT / SAVE AS PDF */
         @media print {
             @page { size: A4 landscape; margin: 4mm; }
-            body { background: white; margin: 0; padding: 0; }
+            body { background: white; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             
             .no-print-section, .no-print-bar, .btn-container, h2, .history-section, .btn-logout, #invoiceModal, #mainMenu { 
                 display: none !important; 
