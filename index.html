@@ -138,7 +138,7 @@
         .watermark-section::before {
             content: "";
             position: absolute;
-            top: 0; left: 35%; width: 60%; height: 100%;
+            top: 0; left: 40%; width: 55%; height: 100%;
             background-image: url('discount.png');
             background-repeat: no-repeat;
             background-position: center;
@@ -227,7 +227,8 @@
                 width: 3%;
             }
 
-            @page invoicePage { size: A4 portrait; margin: 8mm; }
+            /* Optimized Invoice Print Mode with proper margins */
+            @page invoicePage { size: A4 portrait; margin: 10mm; }
             body.invoice-print-mode {
                 page: invoicePage;
             }
@@ -237,13 +238,14 @@
             }
             body.invoice-print-mode #invoiceModal {
                 display: block !important;
-                position: absolute !important;
+                position: relative !important;
                 left: 0 !important;
                 top: 0 !important;
                 width: 100% !important;
-                height: auto !important;
+                height: 100% !important;
                 background: white !important;
                 padding: 0 !important;
+                margin: 0 !important;
                 z-index: 999999;
             }
             body.invoice-print-mode .invoice-box {
@@ -252,7 +254,8 @@
                 width: 100% !important;
                 max-width: 100% !important;
                 margin: 0 auto !important;
-                padding: 10px !important;
+                padding: 12px !important;
+                box-sizing: border-box !important;
             }
             body.invoice-print-mode .no-print-invoice { display: none !important; }
             body.invoice-print-mode .invoice-box input { border: none !important; background: transparent !important; outline: none !important; }
@@ -955,7 +958,7 @@
             contact = "03228073938/03101469911";
         } else {
             addr = "LDA Ave 1 main raiwind road Lahore";
-            email = "rajarabnawaz100@gmail.com";
+            email = "rajarabnwaz100@gmail.com";
             contact = "03228073938 / 03101469911";
         }
 
