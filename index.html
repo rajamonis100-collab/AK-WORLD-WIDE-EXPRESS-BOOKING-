@@ -118,7 +118,7 @@
         .title-label { font-weight: bold; text-transform: uppercase; font-size: 9.5px; display: block; margin-bottom: 0px; color: #222;}
         .bold-text { font-weight: bold; font-size: 12px; }
         
-        /* Highly compressed terms & conditions box (~2cm height) */
+        /* Compressed terms & conditions box */
         .terms-box-text {
             font-size: 7.2px;
             line-height: 1.1;
@@ -227,7 +227,6 @@
                 width: 3%;
             }
 
-            /* Optimized Invoice Print Mode with proper margins */
             @page invoicePage { size: A4 portrait; margin: 10mm; }
             body.invoice-print-mode {
                 page: invoicePage;
@@ -448,13 +447,17 @@
                     <div class="header-service-badge outServiceHeader"></div>
                 </div>
 
+                <!-- Green Mark Area: Not to be attached text and date right under header -->
                 <div class="slip-row">
-                    <div class="slip-col" style="flex: 2; padding: 1px 3px;">
-                        <span class="title-label" style="font-size: 7.5px; margin-bottom: 0;">Terms &amp; Conditions:</span>
-                        <div class="terms-box-text">
-                            Parcels are delivered as per the given schedule; no claims apply for delays due to accidents or flight cancellations. All shipments are sent at the customer’s own risk with no damage warranty. Loss claims are limited to $100 USD or invoice value, whichever is less. Due to low-freight rates, shippers must obtain their own insurance for valuable items. The shipper is solely responsible if the parcel contains dangerous goods, illegal items, explosives, firearms, hazardous materials, jewelry, passports, or drugs. For non-duty-paid or NON DDP services, all applicable customs duties and taxes will be charged to the receiver.
+                    <div class="slip-col" style="flex: 2; padding: 3px 6px;">
+                        <div class="terms-box-text" style="font-size: 8px; font-weight: bold;">
+                            Not to be attached to package. Handed to courier.
                         </div>
-                    </div>                  
+                    </div>
+                    <div class="slip-col" style="flex: 1; text-align: right; padding: 3px 6px;">
+                        <span class="title-label" style="font-size: 8px;">Date</span>
+                        <div class="bold-text outDate2" style="font-size: 10px;"></div>
+                    </div>
                 </div>
                 
                 <div class="slip-row tracking-row" style="display: none;">
@@ -526,12 +529,22 @@
                     </div>
                 </div>
 
-                <div class="slip-row" style="min-height: 40px;">
+                <!-- Red Mark Area: Terms & Conditions below pieces/qty/weight box -->
+                <div class="slip-row">
+                    <div class="slip-col" style="flex: 2; padding: 1px 3px;">
+                        <span class="title-label" style="font-size: 7.5px; margin-bottom: 0;">Terms &amp; Conditions:</span>
+                        <div class="terms-box-text">
+                            Parcels are delivered as per the given schedule; no claims apply for delays due to accidents or flight cancellations. All shipments are sent at the customer’s own risk with no damage warranty. Loss claims are limited to $100 USD or invoice value, whichever is less. Due to low-freight rates, shippers must obtain their own insurance for valuable items. The shipper is solely responsible if the parcel contains dangerous goods, illegal items, explosives, firearms, hazardous materials, jewelry, passports, or drugs. For non-duty-paid or NON DDP services, all applicable customs duties and taxes will be charged to the receiver.
+                        </div>
+                    </div>                  
+                </div>
+
+                <div class="slip-row" style="min-height: 35px;">
                     <div class="slip-col" style="flex: 1;"><span class="title-label">Name(Capital)</span></div>
                     <div class="slip-col" style="flex: 1;"><span class="title-label">Signature</span></div>
                     <div class="slip-col" style="flex: 1;">
                         <span class="title-label">Date</span>
-                        <div style="margin-top: 5px;" class="outDate2"></div>
+                        <div style="margin-top: 3px;" class="outDate2"></div>
                     </div>
                 </div>
                 <div class="barcode-area">
@@ -553,13 +566,18 @@
                     </div>
                     <div class="header-service-badge outServiceHeader"></div>
                 </div>
+
+                <!-- Green Mark Area: Not to be attached text and date right under header -->
                 <div class="slip-row">
-                    <div class="slip-col" style="flex: 2; padding: 1px 3px;">
-                        <span class="title-label" style="font-size: 7.5px; margin-bottom: 0;">Terms &amp; Conditions:</span>
-                        <div class="terms-box-text">
-                            Parcels are delivered as per the given schedule; no claims apply for delays due to accidents or flight cancellations. All shipments are sent at the customer’s own risk with no damage warranty. Loss claims are limited to $100 USD or invoice value, whichever is less. Due to low-freight rates, shippers must obtain their own insurance for valuable items. The shipper is solely responsible if the parcel contains dangerous goods, illegal items, explosives, firearms, hazardous materials, jewelry, passports, or drugs. For non-duty-paid or NON DDP services, all applicable customs duties and taxes will be charged to the receiver.
+                    <div class="slip-col" style="flex: 2; padding: 3px 6px;">
+                        <div class="terms-box-text" style="font-size: 8px; font-weight: bold;">
+                            Not to be attached to package. Handed to courier.
                         </div>
-                    </div>                  
+                    </div>
+                    <div class="slip-col" style="flex: 1; text-align: right; padding: 3px 6px;">
+                        <span class="title-label" style="font-size: 8px;">Date</span>
+                        <div class="bold-text outDate2" style="font-size: 10px;"></div>
+                    </div>
                 </div>
                 
                 <div class="slip-row tracking-row" style="display: none;">
@@ -632,12 +650,22 @@
                     </div>
                 </div>
 
-                <div class="slip-row" style="min-height: 40px;">
+                <!-- Red Mark Area: Terms & Conditions below pieces/qty/weight box -->
+                <div class="slip-row">
+                    <div class="slip-col" style="flex: 2; padding: 1px 3px;">
+                        <span class="title-label" style="font-size: 7.5px; margin-bottom: 0;">Terms &amp; Conditions:</span>
+                        <div class="terms-box-text">
+                            Parcels are delivered as per the given schedule; no claims apply for delays due to accidents or flight cancellations. All shipments are sent at the customer’s own risk with no damage warranty. Loss claims are limited to $100 USD or invoice value, whichever is less. Due to low-freight rates, shippers must obtain their own insurance for valuable items. The shipper is solely responsible if the parcel contains dangerous goods, illegal items, explosives, firearms, hazardous materials, jewelry, passports, or drugs. For non-duty-paid or NON DDP services, all applicable customs duties and taxes will be charged to the receiver.
+                        </div>
+                    </div>                  
+                </div>
+
+                <div class="slip-row" style="min-height: 35px;">
                     <div class="slip-col" style="flex: 1;"><span class="title-label">Name(Capital)</span></div>
                     <div class="slip-col" style="flex: 1;"><span class="title-label">Signature</span></div>
                     <div class="slip-col" style="flex: 1;">
                         <span class="title-label">Date</span>
-                        <div style="margin-top: 5px;" class="outDate2"></div>
+                        <div style="margin-top: 3px;" class="outDate2"></div>
                     </div>
                 </div>
 
@@ -953,12 +981,12 @@
             email = "";
             contact = "03228073938";
         } else if (currentBranch === 'Shalimar') {
-            addr = "Shalimar point lahore";
+            addr = "Sardar point Dahrampura Lahore";
             email = "";
             contact = "03228073938/03101469911";
         } else {
             addr = "LDA Ave 1 main raiwind road Lahore";
-            email = "rajarabnawaz100@gmail.com";
+            email = "rajarabnwaz100@gmail.com";
             contact = "03228073938 / 03101469911";
         }
 
